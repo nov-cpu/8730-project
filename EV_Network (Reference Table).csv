@@ -1,0 +1,46 @@
+Network_ID  (PK),EV_Network,EV_Network_Web
+1,Non-Networked,
+2,FLO,https://www.flo.com
+3,Sun Country Highway,https://suncountryhighway.ca
+4,SWTCH,https://swtchenergy.com
+5,Circuit électrique,https://lecircuitelectrique.com
+6,Tesla,https://www.tesla.com/supercharger
+7,BCHYDRO,https://electricvehicles.bchydro.com/charge/public-charging/our-fast-charging-network
+8,EV Connect,https://www.evconnect.com
+9,Tesla Destination,https://www.tesla.com/destination-charging
+10,ChargePoint Network,https://www.chargepoint.com
+11,eCharge Network,https://echargenetwork.com
+12,IVY,https://ivycharge.com
+13,Electrify Canada,https://www.electrify-canada.ca
+14,CHARGELAB,https://chargelab.co
+15,COUCHE_TARD,https://www.couche-tard.com/recharge
+16,OpConnect,https://opconnect-ev.com
+17,JULE,https://www.julepower.com
+18,SHELL_RECHARGE,https://www.shell.us/motorist/electric-vehicle-charging.html
+19,NOVA_SCOTIA_POWER,https://www.nspower.ca/cleanandgreen/innovation/electric-vehicle-network
+20,NOODOE,https://www.noodoe.com
+21,ON_THE_RUN_EV,https://www.ontherunstores.com/ev-charging
+22,AMPUP,https://ampup.io
+23,HONEY_BADGER,https://www.badgercharging.ca
+24,AUTEL,https://autelenergy.us
+25,TURNONGREEN,https://turnongreen.com
+26,EVBOLT,https://evbolt.com
+27,Hwisel,https://hwisel.com
+28,7CHARGE,https://www.7-eleven.com/7charge
+29,ZEFNET,https://www.zefenergy.com
+30,EVGATEWAY,https://evgateway.com
+31,CHARGEUP,https://novacharge.net/chargeup/
+32,FORD_CHARGE,https://www.ford.com/support/category/electric-vehicle/charging/public-charging/
+33,IN_CHARGE,https://inchargeus.com
+34,LAKELAND_EV,https://lakelandevcharging.ca
+35,LOOP,https://loopglobal.com
+36,CHAEVI,https://na.chaevi.com
+37,EPIC_CHARGING,https://epiccharging.com
+38,GO_TO_U,https://goto-u.com/en
+39,RED_E,https://www.redecharge.com
+40,MARCHE_EXPRESS,https://journie.ca/on-the-run-ca/qc-fr/ev-charging
+41,FILGO,https://depanneurs.filgo.ca/en/electric-charging-stations/
+42,EVSTART,https://evstart.com
+43,PLUGEV,https://www.plugev.com
+44,SURECHARGE,https://surecharge.ca
+45,MERCEDES_BENZ,https://www.mbusa.com/en/ev-charging-stations

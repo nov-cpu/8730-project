@@ -1,0 +1,9 @@
+Table,Role,Key Structure,Notes
+Locations,Entity,PK: Location_ID,Parent to Stations (1:N)
+EV_Network,Entity,PK: Network_ID,Parent to Stations (1:N)
+Stations,Core Entity,"PK: Station_ID; FK: Location_ID, Network_ID","Central hub — two inbound 1:N, one 1:1, two 1:N-into-junction"
+Charging_Information,Extension (1:1),PK/FK: Station_ID,"Structurally a 1:1 extension — single-column key, no composite, no second parent table"
+EV_Connectors,Reference / Lookup,PK: Connector_ID,Static reference list of connector types
+Payment_Methods,Reference / Lookup,PK: Payment_ID,Static reference list of payment types
+Station_Connector,Junction (M:N),Composite PK: Station_ID + Connector_ID,Resolves Stations ? EV_Connectors
+Station_Payments,Junction (M:N),Composite PK: Station_ID + Payment_ID,Resolves Stations ? Payment_Methods
