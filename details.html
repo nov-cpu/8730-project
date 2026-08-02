@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV Station Details</title>
+    <!-- PapaParse to parse CSV data directly in the browser -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        h1 {
+            font-size: 24px;
+            margin-top: 0;
+            color: #1a252c;
+            border-bottom: 2px solid #eef2f5;
+            padding-bottom: 12px;
+        }
+        .status-message {
+            font-style: italic;
+            color: #666;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eef2f5;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        .label {
+            font-weight: 600;
+            color: #555;
+            width: 40%;
+        }
+        .value {
+            width: 60%;
+            text-align: right;
+            color: #222;
+            word-break: break-word;
+        }
+        .error {
+            color: #d9534f;
+            font-weight: bold;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="station-title">Station Details</h1>
+    <div id="content">
+        <p class="status-message">Loading details from database...</p>
+    </div>
+    <a href="index.html" class="back-btn">&larr; Back to Map</a>
+</div>
+
+<script>
+    // =========================================================
+    // 1. HARDCODED ADDRESS (FIRST LINE OF SCRIPT)
+    // =========================================================
+    const TARGET_ADDRESS = "1 Bouvier Trail"; 
+
+    // 2. CSV URL ON GITHUB PAGES / REPOSITORY
+    // Replace 'ev_stations.csv' with the relative path to your CSV file on GitHub
+    const CSV_FILE_PATH = "alt_fuel_stations_clean.csv"; 
+
+    // =========================================================
+    // 3. FETCH AND PROCESS CSV DATA
+    // =========================================================
+    Papa.parse(CSV_FILE_PATH, {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+            const data = results.data;
+            
+            // Find row where the address matches (case-insensitive & trimmed)
+            const matchedRow = data.find(row => {
+                // Adjust 'Address' if your CSV column header uses a different name (e.g., 'address', 'Station Address')
+                const csvAddress = row['Address'] || row['address'] || '';
+                return csvAddress.trim().toLowerCase() === TARGET_ADDRESS.trim().toLowerCase();
+            });
+
+            if (matchedRow) {
+                renderDetails(matchedRow);
+            } else {
+                document.getElementById('content').innerHTML = `
+                    <p class="error">No station found matching address:</p>
+                    <p><code>${TARGET_ADDRESS}</code></p>
+                `;
+            }
+        },
+        error: function(err) {
+            document.getElementById('content').innerHTML = `
+                <p class="error">Failed to load CSV file. Make sure <code>${CSV_FILE_PATH}</code> is accessible.</p>
+            `;
+        }
+    });
+
+    // Helper function to dynamically generate HTML for CSV columns
+    function renderDetails(dataRow) {
+        let html = '';
+        
+        // If 'Name' or 'Station Name' exists, update title
+        if (dataRow['Name'] || dataRow['name']) {
+            document.getElementById('station-title').innerText = dataRow['Name'] || dataRow['name'];
+        }
+
+        for (const [key, value] of Object.entries(dataRow)) {
+            html += `
+                <div class="detail-row">
+                    <span class="label">${key}</span>
+                    <span class="value">${value || 'N/A'}</span>
+                </div>
+            `;
+        }
+        
+        document.getElementById('content').innerHTML = html;
+    }
+</script>
+
+</body>
+</html>
