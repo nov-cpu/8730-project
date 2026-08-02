@@ -1,0 +1,95 @@
+{
+  "name": "EVStation",
+  "type": "object",
+  "properties": {
+    "station_name": {
+      "type": "string"
+    },
+    "street_address": {
+      "type": "string"
+    },
+    "intersection_directions": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "zip": {
+      "type": "string"
+    },
+    "station_phone": {
+      "type": "string"
+    },
+    "extension_second_number": {
+      "type": "string"
+    },
+    "access_days_time": {
+      "type": "string"
+    },
+    "cards_accepted": {
+      "type": "string"
+    },
+    "ev_level1_evse_num": {
+      "type": "number"
+    },
+    "ev_level2_evse_num": {
+      "type": "number"
+    },
+    "ev_dc_fast_count": {
+      "type": "number"
+    },
+    "ev_network": {
+      "type": "string"
+    },
+    "ev_network_web": {
+      "type": "string"
+    },
+    "geocode_status": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "date_last_confirmed": {
+      "type": "string"
+    },
+    "original_station_id": {
+      "type": "number"
+    },
+    "ev_connector_types": {
+      "type": "string"
+    },
+    "access_code": {
+      "type": "string"
+    },
+    "access_detail_code": {
+      "type": "string"
+    },
+    "ev_pricing": {
+      "type": "string"
+    },
+    "ev_on_site_renewable_source": {
+      "type": "string"
+    },
+    "restricted_access": {
+      "type": "number"
+    },
+    "maximum_vehicle_class": {
+      "type": "string"
+    },
+    "ev_workplace_charging": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "station_name",
+    "latitude",
+    "longitude"
+  ]
+}
