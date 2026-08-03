@@ -33,12 +33,41 @@ useEffect(() => {
       dynamicTyping: true,
       complete: (results) => {
         const cleaned = results.data.map((row, id) => ({
-          // ... (keep all your existing mapping logic here) ...
           id: id + 1,
-          station_name: row["Station Name"] || row["station_name"] || row["Station_name"] || "EV Station",
+          // Account for both the old flat CSV format and the new SQL-merged column headers
+          station_name: row["Station_name"] || row["Station Name"] || row["station_name"] || "EV Station",
+          street_address: row["Street_Address"] || row["Street Address"] || row["street_address"] || "",
+          city: row["City"] || row["City "] || row["city"] || "",
+          state: row["State"] || row["state"] || "",
+          zip: row["ZIP"] || row["zip"] || "",
           latitude: parseFloat(row["Latitude"] || row["latitude"]),
           longitude: parseFloat(row["Longitude"] || row["longitude"]),
-          // ... (keep the rest)
+          
+          // Network & Connectors
+          ev_network: row["EV_Network"] || row["EV Network"] || row["ev_network"] || "Non-Networked",
+          ev_connector_types: row["EV_Connector_Types"] || row["EV Connector Types"] || row["ev_connector_types"] || "J1772",
+          
+          // Charger Counts (Crucial for the badges)
+          ev_level1_evse_num: parseInt(row["EV_Level1_EVSE_Num"] || row["EV Level1 EVSE Num"] || row["ev_level1_evse_num"] || 0),
+          ev_level2_evse_num: parseInt(row["EV_Level2_EVSE_num"] || row["EV Level2 EVSE Num"] || row["ev_level2_evse_num"] || 0),
+          ev_dc_fast_count: parseInt(row["EV_DC_Fast_Count"] || row["EV DC Fast Count"] || row["ev_dc_fast_count"] || 0),
+          
+          // Access & Hours
+          access_code: row["Access_code"] || row["Access Code"] || row["access_code"] || "public",
+          access_detail_code: row["Access_Detail_code"] || row["Access Detail Code"] || "",
+          access_days_time: row["Access_Day_time"] || row["Access Days Time"] || row["access_days_time"] || "24 Hours Daily",
+          
+          // Pricing & Vehicles
+          ev_pricing: row["EV_Pricing"] || row["EV Pricing"] || row["ev_pricing"] || "Free / Unknown",
+          maximum_vehicle_class: row["Maximum_Vehicle_Class"] || "Light Duty",
+          
+          // Booleans
+          restricted_access: row["Restricted_access"] == 1 || String(row["Restricted_access"]).toLowerCase() === 'true',
+          ev_workplace_charging: row["Ev_Workplace_charging "] == 1 || String(row["Ev_Workplace_charging "]).toLowerCase() === 'true',
+          
+          // Google Data (from SerpAPI if available)
+          rating: row["google_rating"] || "N/A",
+          reviews_count: row["google_reviews_count"] || 0,
         })).filter(s => !isNaN(s.latitude) && !isNaN(s.longitude));
 
         setAllStations(cleaned);
@@ -47,7 +76,7 @@ useEffect(() => {
       error: (error) => {
         console.error("Failed to load CSV:", error);
         alert("Error loading data! Please check the CSV link in your code.");
-        setIsLoading(false); // Stops the infinite loading!
+        setIsLoading(false);
       }
     });
   }, []);
