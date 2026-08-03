@@ -13,7 +13,7 @@ import { Download, MapPin, Zap, ShieldCheck, Truck, CreditCard } from "lucide-re
 import { Button } from "@/components/ui/button";
 
 // Pointing to your raw enriched dataset
-const CSV_DATA_URL = "https://github.com/nov-cpu/8730-project/blob/Data/Final_Cleaned_Data_(All%20sheets).xlsx";
+const CSV_DATA_URL = "https://raw.githubusercontent.com/nov-cpu/8730-project/main/Data/final_merged_dashboard_data.csv";
 
 export default function Home() {
   const [allStations, setAllStations] = useState([]);
